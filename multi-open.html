@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizador de Anexos</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    img { max-width: 200px; margin: 10px; cursor: pointer; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h2>Arquivos do registro</h2>
+  <p>Se nem todas as abas abrirem, clique nas imagens abaixo ou libere pop-ups no navegador.</p>
+  <div id="galeria"></div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const urls = params.getAll('u');
+
+    urls.forEach((url, index) => {
+      if (index === 0) window.open(url, '_blank'); // tenta abrir o 1º automaticamente
+
+      const img = document.createElement('img');
+      img.src = url;
+      img.onclick = () => window.open(url, '_blank');
+      document.getElementById('galeria').appendChild(img);
+    });
+  </script>
+</body>
+</html>
